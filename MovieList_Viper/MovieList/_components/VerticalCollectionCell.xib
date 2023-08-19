@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VerticalCollectionCell" customModule="MovieList_Viper" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VerticalCollectionCell" id="RqQ-VW-dfh" customClass="VerticalCollectionCell" customModule="MovieList_Viper" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2Xy-QU-CKT">
+                <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Yxl-LZ-q10">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="200"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="28p-lX-jBb">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Yxl-LZ-q10" secondAttribute="bottom" id="0e9-VJ-BEO"/>
+                    <constraint firstAttribute="trailing" secondItem="Yxl-LZ-q10" secondAttribute="trailing" id="MjX-zc-0rI"/>
+                    <constraint firstItem="Yxl-LZ-q10" firstAttribute="leading" secondItem="2Xy-QU-CKT" secondAttribute="leading" id="SvC-Ys-mT0"/>
+                    <constraint firstItem="Yxl-LZ-q10" firstAttribute="top" secondItem="2Xy-QU-CKT" secondAttribute="top" id="sc7-10-x7M"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <connections>
+                <outlet property="horizontalCollectionView" destination="Yxl-LZ-q10" id="d6r-XL-C3b"/>
+            </connections>
+            <point key="canvasLocation" x="-11" y="-18"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
