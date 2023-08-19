@@ -26,6 +26,16 @@ struct MovieDetailModel: Codable {
     let video: Bool?
     let voteAverage: Double?
     let voteCount: Int?
+    var posterURL: URL? {
+      get {
+        return URL(string: "https://image.tmdb.org/t/p/w500" + (posterPath ?? ""))
+      }
+    }
+    var backdropURL: URL? {
+      get {
+        return URL(string: "https://image.tmdb.org/t/p/w500" + (backdropPath ?? ""))
+      }
+    }
 
     enum CodingKeys: String, CodingKey {
         case adult

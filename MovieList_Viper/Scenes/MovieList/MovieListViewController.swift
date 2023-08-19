@@ -92,7 +92,7 @@ final class MovieListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Movie List"
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
+        appearance.configureWithTransparentBackground()
         appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
 
@@ -110,6 +110,15 @@ final class MovieListViewController: UIViewController {
 
 extension MovieListViewController: MovieListViewProtocol {
     
+}
+
+extension MovieListViewController: VerticalCollectionCellDelegate {
+    func didSelectMovie(with movieId: Int) {
+        DispatchQueue.main.async { [weak self] in
+            let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
+            self?.navigationController?.pushViewController(movieDetail, animated: true)
+        }
+    }
 }
 
 extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -137,6 +146,7 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: VerticalCollectionCell.self, for: indexPath)
+        cell.delegate = self
         
         switch indexPath.section {
         case 0:

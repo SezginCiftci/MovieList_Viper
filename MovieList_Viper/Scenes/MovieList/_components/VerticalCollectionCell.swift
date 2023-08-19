@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
+
+protocol VerticalCollectionCellDelegate {
+    func didSelectMovie(with movieId: Int)
+}
 
 final class VerticalCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
+    
+    var delegate: VerticalCollectionCellDelegate?
     
     var movieResult: [Movie]? {
         didSet {
@@ -45,13 +52,18 @@ extension VerticalCollectionCell: UICollectionViewDelegateFlowLayout, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        
         cell.movieTitleLabel.text = movieResult?[indexPath.row].title
         cell.movieReleaseDateLabel.text = movieResult?[indexPath.row].releaseDate
+        cell.movieImageView.kf.setImage(with: movieResult?[indexPath.row].posterURL)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        if let movieId = movieResult?[indexPath.row].id {
+            delegate?.didSelectMovie(with: movieId)
+        }
     }
 }
 

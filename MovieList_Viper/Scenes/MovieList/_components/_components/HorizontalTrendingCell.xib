@@ -20,19 +20,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="236" height="281"/>
                     </imageView>
                     <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="86A-T8-ZG5">
-                        <rect key="frame" x="0.0" y="206" width="236" height="75"/>
+                        <rect key="frame" x="0.0" y="221" width="236" height="60"/>
                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fgH-MP-efC">
-                            <rect key="frame" x="0.0" y="0.0" width="236" height="75"/>
+                            <rect key="frame" x="0.0" y="0.0" width="236" height="60"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFK-un-fln">
-                                    <rect key="frame" x="8" y="50" width="220" height="17"/>
+                                    <rect key="frame" x="8" y="35" width="220" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="0.99199998379999998" green="0.94900000100000004" blue="0.73172030170000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZk-gz-bnu">
-                                    <rect key="frame" x="8" y="18" width="220" height="24"/>
+                                    <rect key="frame" x="8" y="3" width="220" height="24"/>
                                     <fontDescription key="fontDescription" name="EuphemiaUCAS" family="Euphemia UCAS" pointSize="18"/>
                                     <color key="textColor" red="0.94509804249999996" green="0.84313726430000002" blue="0.42745098469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                             </constraints>
                         </view>
                         <constraints>
-                            <constraint firstAttribute="height" constant="75" id="OP5-wK-7Dc"/>
+                            <constraint firstAttribute="height" constant="60" id="OP5-wK-7Dc"/>
                         </constraints>
                         <blurEffect style="regular"/>
                     </visualEffectView>

@@ -21,7 +21,7 @@
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7Ah-oC-h1C">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="generalBg"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HoO-26-2w1">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -31,7 +31,7 @@
                 </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="generalBg"/>
+            <color key="backgroundColor" name="collectionBg"/>
             <constraints>
                 <constraint firstItem="7Ah-oC-h1C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CiC-QT-alQ"/>
                 <constraint firstItem="7Ah-oC-h1C" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="THU-6F-CbC"/>
@@ -43,6 +43,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="collectionBg">
+            <color red="0.26666668059999998" green="0.59215688710000003" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
         <namedColor name="generalBg">
             <color red="0.066666662690000003" green="0.11372549830000001" blue="0.21568629149999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
