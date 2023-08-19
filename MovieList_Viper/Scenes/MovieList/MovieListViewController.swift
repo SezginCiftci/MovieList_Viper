@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol MovieListViewProtocol: AnyObject {
+    
+}
 
 final class MovieListViewController: UIViewController {
     
@@ -15,6 +18,8 @@ final class MovieListViewController: UIViewController {
     var trendingMovies: MovieListModel?
     var popularMovies: MovieListModel?
     var upcomingMovies: MovieListModel?
+    
+    var presenter: MovieListPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +91,13 @@ final class MovieListViewController: UIViewController {
     func prepareNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = "Movie List"
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
     }
     
     func prepareCollectionView() {
@@ -94,6 +106,10 @@ final class MovieListViewController: UIViewController {
         mainCollectionView.register(nib: UINib(nibName: "VerticalCollectionCell", bundle: nil), forCellWithClass: VerticalCollectionCell.self)
         mainCollectionView.register(supplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self)
     }
+}
+
+extension MovieListViewController: MovieListViewProtocol {
+    
 }
 
 extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {

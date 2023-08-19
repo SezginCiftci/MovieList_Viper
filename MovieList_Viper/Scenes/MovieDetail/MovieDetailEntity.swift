@@ -1,8 +1,8 @@
 //
-//  MovieDetailModel.swift
+//  MovieDetailEntity.swift
 //  MovieList_Viper
 //
-//  Created by Sezgin Çiftci on 19.08.2023.
+//  Created by Sezgin Çiftci on 20.08.2023.
 //
 
 import Foundation
