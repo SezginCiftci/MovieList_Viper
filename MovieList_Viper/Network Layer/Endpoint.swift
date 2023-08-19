@@ -44,11 +44,11 @@ enum Endpoint {
 extension Endpoint: EndpointProtocol {
     
     var baseURL: String {
-        return "https://api.themoviedb.org"
+        return APIConstants.baseUrl
     }
     
     var apiKey: String {
-        return "faa4f619f7bb8fe2630d09c4c271cd00"
+        return APIConstants.apiKey
     }
     
     var path: String {
