@@ -176,8 +176,8 @@
 			children = (
 				C48643B22A90F746003B8280 /* Extension */,
 				C45273232A90CC0000C56B32 /* Network Layer */,
-				C498845A2A8FFE9E00D54372 /* Application */,
 				C498845B2A8FFEE300D54372 /* MovieList */,
+				C498845A2A8FFE9E00D54372 /* Application */,
 				C49884582A8FFE8100D54372 /* Resources */,
 				C49884592A8FFE9100D54372 /* Supporting Files */,
 			);

@@ -12,23 +12,74 @@ final class MovieListViewController: UIViewController {
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
-    var movies: MovieListModel?
+    var trendingMovies: MovieListModel?
+    var popularMovies: MovieListModel?
+    var upcomingMovies: MovieListModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCollectionView()
         prepareNavigationBar()
         
-        NetworkManager.shared.getTrendingMovies(pageIndex: 1) { result in
+        getAllMovies()
+    }
+    
+    func getAllMovies() {
+        let group = DispatchGroup()
+
+        group.enter()
+        loadTrendingMovies {
+            group.leave()
+        }
+
+        group.enter()
+        loadPopularMovies {
+            group.leave()
+        }
+
+        group.enter()
+        loadUpcomingMovies {
+            group.leave()
+        }
+
+        group.notify(queue: .main) { [weak self] in
+            self?.mainCollectionView.reloadData()
+        }
+    }
+    
+    func loadTrendingMovies(completion: @escaping () -> ()) {
+        NetworkManager.shared.getTrendingMovies(pageIndex: 1) { [weak self] result in
             switch result {
             case .success(let success):
-                self.movies = success
-                DispatchQueue.main.async {
-                    self.mainCollectionView.reloadData()
-                }
+                self?.trendingMovies = success
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
+            completion()
+        }
+    }
+    
+    func loadPopularMovies(completion: @escaping () -> ()) {
+        NetworkManager.shared.getPopularMovies(pageIndex: 1) { [weak self] result in
+            switch result {
+            case .success(let success):
+                self?.popularMovies = success
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+            completion()
+        }
+    }
+    
+    func loadUpcomingMovies(completion: @escaping () -> ()) {
+        NetworkManager.shared.getUpcomingMovies(pageIndex: 1) { [weak self] result in
+            switch result {
+            case .success(let success):
+                self?.upcomingMovies = success
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+            completion()
         }
     }
     
@@ -71,15 +122,37 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: VerticalCollectionCell.self, for: indexPath)
         
-        cell.movieResult = movies?.results ?? []
+        switch indexPath.section {
+        case 0:
+            cell.movieResult = trendingMovies?.results ?? []
+        case 1:
+            cell.movieResult = popularMovies?.results ?? []
+        case 2:
+            cell.movieResult = upcomingMovies?.results ?? []
+        default:
+            break
+        }
+        
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self, for: indexPath)
+        
         header.setupCell()
-        header.headerLabel.text = "Trending Movies"
+        
+        switch indexPath.section {
+        case 0:
+            header.headerText = "Trending Movies"
+        case 1:
+            header.headerText = "Popular Movies"
+        case 2:
+            header.headerText = "Upcoming Movies"
+        default:
+            break
+        }
+        
         return header
     }
     

@@ -8,58 +8,70 @@
 import Foundation
 
 struct MovieListModel: Codable {
-    let page: Int?
-    let results: [ResultData]?
-    let totalPages, totalResults: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
+  let page: Int
+  let results: [Movie]
+  let totalPages, totalResults: Int
+  
+  enum CodingKeys: String, CodingKey {
+    case page, results
+    case totalPages = "total_pages"
+    case totalResults = "total_results"
+  }
 }
 
 // MARK: - Result
-struct ResultData: Codable {
-    let adult: Bool?
-    let backdropPath: String?
-    let id: Int?
-    let title: String?
-    let originalLanguage: OriginalLanguage?
-    let originalTitle, overview, posterPath: String?
-    let mediaType: MediaType?
-    let genreIDS: [Int]?
-    let popularity: Double?
-    let releaseDate: String?
-    let video: Bool?
-    let voteAverage: Double?
-    let voteCount: Int?
-
-    enum CodingKeys: String, CodingKey {
-        case adult
-        case backdropPath = "backdrop_path"
-        case id, title
-        case originalLanguage = "original_language"
-        case originalTitle = "original_title"
-        case overview
-        case posterPath = "poster_path"
-        case mediaType = "media_type"
-        case genreIDS = "genre_ids"
-        case popularity
-        case releaseDate = "release_date"
-        case video
-        case voteAverage = "vote_average"
-        case voteCount = "vote_count"
+struct Movie: Codable {
+  let adult: Bool?
+  let backdropPath: String?
+  let genreIDS: [Int]?
+  let id: Int
+  let originalLanguage: String?
+  let originalTitle, overview: String?
+  let popularity: Double?
+  let releaseDate, title: String?
+  let video: Bool?
+  let voteAverage: Double?
+  let voteCount: Int?
+  let posterPath: String?
+  var posterURL: URL? {
+    get {
+      return URL(string: "https://image.tmdb.org/t/p/w500" + (posterPath ?? ""))
     }
-}
-
-enum MediaType: String, Codable {
-    case movie = "movie"
+  }
+  var backdropURL: URL? {
+    get {
+      return URL(string: "https://image.tmdb.org/t/p/w500" + (backdropPath ?? ""))
+    }
+  }
+  
+  enum CodingKeys: String, CodingKey {
+    case adult
+    case backdropPath = "backdrop_path"
+    case genreIDS = "genre_ids"
+    case id
+    case originalLanguage = "original_language"
+    case originalTitle = "original_title"
+    case overview, popularity
+    case posterPath = "poster_path"
+    case releaseDate = "release_date"
+    case title, video
+    case voteAverage = "vote_average"
+    case voteCount = "vote_count"
+  }
 }
 
 enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case fr = "fr"
-    case hi = "hi"
-    case tr = "tr"
+  case en = "en"
+  case ja = "ja"
+  case ru = "ru"
+  case unknown
+  
+  init(value: String) {
+    if let language = OriginalLanguage(rawValue: value) {
+      self = language
+    } else {
+      self = .unknown
+    }
+  }
 }
+

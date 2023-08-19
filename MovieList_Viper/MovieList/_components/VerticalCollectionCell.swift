@@ -11,7 +11,7 @@ final class VerticalCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     
-    var movieResult: [ResultData]? {
+    var movieResult: [Movie]? {
         didSet {
             horizontalCollectionView.reloadData()
         }
