@@ -9,16 +9,12 @@ import UIKit
 
 final class MovieCollectionReusableView: UICollectionReusableView {
     
+    @IBOutlet weak var headerLabel: UILabel!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func setupCell() {
+        if let viewForXib = Bundle.main.loadNibNamed("MovieCollectionReusableView", owner: self)?[0] as? UIView {
+            viewForXib.frame = self.bounds
+            addSubview(viewForXib)
+        }
     }
-    
-    
-//    private func setupCell() {
-//        if let viewForXib = Bundle.main.loadNibNamed("MovieCollectionReusableView", owner: self)?[0] as? UITableViewCell {
-//            viewForXib.frame = self.bounds
-//            addSubview(viewForXib)
-//        }
-//    }
 }

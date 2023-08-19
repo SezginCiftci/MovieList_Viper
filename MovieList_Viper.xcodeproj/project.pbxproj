@@ -139,6 +139,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C48643B92A9102AD003B8280 /* _components */ = {
+			isa = PBXGroup;
+			children = (
+				C49884622A90072900D54372 /* HorizontalTrendingCell.swift */,
+				C49884652A90077A00D54372 /* HorizontalTrendingCell.xib */,
+			);
+			path = _components;
+			sourceTree = "<group>";
+		};
 		C498841C2A8FFE3900D54372 = {
 			isa = PBXGroup;
 			children = (
@@ -228,12 +237,11 @@
 		C49884612A9002E500D54372 /* _components */ = {
 			isa = PBXGroup;
 			children = (
-				C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */,
-				C49884682A90081600D54372 /* MovieCollectionReusableView.xib */,
-				C49884622A90072900D54372 /* HorizontalTrendingCell.swift */,
-				C49884652A90077A00D54372 /* HorizontalTrendingCell.xib */,
+				C48643B92A9102AD003B8280 /* _components */,
 				C498846D2A900D6100D54372 /* VerticalCollectionCell.swift */,
 				C49884702A900D9900D54372 /* VerticalCollectionCell.xib */,
+				C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */,
+				C49884682A90081600D54372 /* MovieCollectionReusableView.xib */,
 			);
 			path = _components;
 			sourceTree = "<group>";

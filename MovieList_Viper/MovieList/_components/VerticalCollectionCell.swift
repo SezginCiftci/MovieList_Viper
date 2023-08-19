@@ -11,6 +11,12 @@ final class VerticalCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var horizontalCollectionView: UICollectionView!
     
+    var movieResult: [ResultData]? {
+        didSet {
+            horizontalCollectionView.reloadData()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         prepareCollectionView()
@@ -30,15 +36,22 @@ extension VerticalCollectionCell: UICollectionViewDelegateFlowLayout, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.width - 20)/3, height: 100)
+        return CGSize(width: (collectionView.frame.width - 20)/2, height: collectionView.frame.height - 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return movieResult?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        cell.movieTitleLabel.text = movieResult?[indexPath.row].title
+        cell.movieReleaseDateLabel.text = movieResult?[indexPath.row].releaseDate
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
 }
 

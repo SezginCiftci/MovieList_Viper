@@ -9,6 +9,10 @@ import UIKit
 
 final class HorizontalTrendingCell: UICollectionViewCell {
     
+    @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var movieReleaseDateLabel: UILabel!
+    
     override func layoutSubviews() {
         super.layoutSubviews()
     }
