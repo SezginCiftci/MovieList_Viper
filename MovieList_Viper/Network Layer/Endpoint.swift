@@ -44,11 +44,11 @@ enum Endpoint {
 extension Endpoint: EndpointProtocol {
     
     var baseURL: String {
-        return APIConstants.baseUrl
+        return getKeys(key: "baseUrl")
     }
     
     var apiKey: String {
-        return APIConstants.apiKey
+        return getKeys(key: "apiKey")
     }
     
     var path: String {
@@ -104,5 +104,13 @@ extension Endpoint: EndpointProtocol {
         case language = "language"
         case apiKey = "api_key"
         case pageIndex = "page"
+    }
+    
+    func getKeys(key: String) -> String {
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            let key = NSDictionary(contentsOfFile: path)?[key] as? String ?? ""
+            return key
+        }
+        return ""
     }
 }
