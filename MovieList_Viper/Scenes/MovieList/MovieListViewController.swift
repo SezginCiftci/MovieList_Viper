@@ -24,11 +24,15 @@ final class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareCollectionView()
-        prepareNavigationBar()
-        
         getAllMovies()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        prepareNavigationBar()
+    }
+    
+    // Interactor
     func getAllMovies() {
         let group = DispatchGroup()
 
@@ -87,6 +91,7 @@ final class MovieListViewController: UIViewController {
             completion()
         }
     }
+    //Buraya Kadar
     
     func prepareNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -113,11 +118,10 @@ extension MovieListViewController: MovieListViewProtocol {
 }
 
 extension MovieListViewController: VerticalCollectionCellDelegate {
+    //Router
     func didSelectMovie(with movieId: Int) {
-        DispatchQueue.main.async { [weak self] in
-            let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
-            self?.navigationController?.pushViewController(movieDetail, animated: true)
-        }
+        let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
+        self.navigationController?.pushViewController(movieDetail, animated: true)
     }
 }
 
@@ -148,6 +152,7 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
         let cell = collectionView.dequeueReusableCell(withClass: VerticalCollectionCell.self, for: indexPath)
         cell.delegate = self
         
+        //Presenter
         switch indexPath.section {
         case 0:
             cell.movieResult = trendingMovies?.results ?? []
@@ -167,7 +172,7 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self, for: indexPath)
         
         header.setupCell()
-        
+        //Presenter
         switch indexPath.section {
         case 0:
             header.headerText = "Trending Movies"

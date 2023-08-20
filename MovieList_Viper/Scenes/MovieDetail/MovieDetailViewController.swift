@@ -15,10 +15,11 @@ protocol MovieDetailViewProtocol: AnyObject {
 final class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var foregroundImageView: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var recommendationCollectionView: UICollectionView!
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
+    
     
     var presenter: MovieDetailPresenterProtocol?
     
@@ -40,13 +41,30 @@ final class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         prepareCollectionView()
         getAllMovies()
+        prepareNavigationBar()
     }
     
-    func configureUI() {
+    func prepareNavigationBar() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor(named: "textColor")!]
+
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+    }
+    
+    func updateUI() {
         backgroundImageView.kf.setImage(with: movieDetail?.backdropURL)
-        foregroundImageView.kf.setImage(with: movieDetail?.posterURL)
+        title = movieDetail?.originalTitle
         dateLabel.text = movieDetail?.releaseDate
         overviewLabel.text = movieDetail?.overview
+        
+        if self.overviewLabel.bounds.size.height > 100 {
+            self.contentViewHeight.constant = view.frame.size.height + (overviewLabel.bounds.size.height - 100)
+            self.view.layoutIfNeeded()
+        }
     }
     
     func getAllMovies() {
@@ -64,7 +82,7 @@ final class MovieDetailViewController: UIViewController {
 
         group.notify(queue: .main) { [weak self] in
             self?.recommendationCollectionView.reloadData()
-            self?.configureUI()
+            self?.updateUI()
         }
     }
     
@@ -99,7 +117,9 @@ final class MovieDetailViewController: UIViewController {
     }
     
     @IBAction func seeMoreButtonTapped(_ sender: UIButton) {
-        
+        if let url = URL(string: movieDetail?.homepage ?? "https://en.wikipedia.org/wiki/HTTP_404") {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
@@ -129,5 +149,11 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
         cell.movieImageView.kf.setImage(with: movieRecommendations?.results[indexPath.row].posterURL)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let id = movieRecommendations?.results[indexPath.row].id ?? movieId
+        let movieDetail = MovieDetailRouter.createModule(movieId: id)
+        present(movieDetail, animated: true)
     }
 }
