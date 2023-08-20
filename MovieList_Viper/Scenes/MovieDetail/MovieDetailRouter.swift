@@ -16,9 +16,9 @@ final class MovieDetailRouter: MovieDetailRouterProtocol {
     weak var view: UIViewController?
     
     class func createModule(movieId: Int) -> MovieDetailViewController {
-        let view = MovieDetailViewController(movieId: movieId)
+        let view = MovieDetailViewController()
         let interactor = MovieDetailInteractor()
-        let presenter = MovieDetailPresenter()
+        let presenter = MovieDetailPresenter(movieId: movieId)
         let router = MovieDetailRouter()
         
         view.presenter = presenter

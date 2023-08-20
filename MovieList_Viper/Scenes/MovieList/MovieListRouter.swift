@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MovieListRouterProtocol {
-    
+    func routeToDetail(movieId: Int)
 }
 
 final class MovieListRouter: MovieListRouterProtocol {
@@ -29,6 +29,11 @@ final class MovieListRouter: MovieListRouterProtocol {
         presenter.interactor = interactor
         
         return view
+    }
+    
+    func routeToDetail(movieId: Int) {
+        let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
+        view?.navigationController?.pushViewController(movieDetail, animated: true)
     }
 }
 

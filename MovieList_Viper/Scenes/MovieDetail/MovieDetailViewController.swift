@@ -9,7 +9,10 @@ import UIKit
 import Kingfisher
 
 protocol MovieDetailViewProtocol: AnyObject {
-    
+    func prepareNavigationBar()
+    func prepareCollectionView()
+    func updateUI(backdropUrl: URL, movieTitle: String, dateText: String, overviewText: String)
+    func reloadCollectionView()
 }
 
 final class MovieDetailViewController: UIViewController {
@@ -20,30 +23,24 @@ final class MovieDetailViewController: UIViewController {
     @IBOutlet weak var recommendationCollectionView: UICollectionView!
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
-    
     var presenter: MovieDetailPresenterProtocol?
-    
-    var movieDetail: MovieDetailModel?
-    var similarMovies: MovieListModel?
-    
-    var movieId: Int
-    
-    init(movieId: Int) {
-        self.movieId = movieId
-        super.init(nibName: nil, bundle: nil)
-    }
-        
-    required convenience init?(coder: NSCoder) {
-        self.init(movieId: 0)
-    }
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareCollectionView()
-        getAllMovies()
-        prepareNavigationBar()
+        presenter?.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter?.viewWillAppear()
+    }
+    
+    @IBAction func seeMoreButtonTapped(_ sender: UIButton) {
+        UIApplication.shared.open((presenter?.getHomepageUrl())!)
+    }
+}
+
+extension MovieDetailViewController: MovieDetailViewProtocol {
     func prepareNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = false
         let appearance = UINavigationBarAppearance()
@@ -55,58 +52,17 @@ final class MovieDetailViewController: UIViewController {
         navigationItem.scrollEdgeAppearance = appearance
     }
     
-    func updateUI() {
-        backgroundImageView.kf.setImage(with: movieDetail?.backdropURL)
-        title = movieDetail?.originalTitle
-        dateLabel.text = movieDetail?.releaseDate
-        overviewLabel.text = movieDetail?.overview
-        
-        if self.overviewLabel.bounds.size.height > 100 {
-            self.contentViewHeight.constant = view.frame.size.height + (overviewLabel.bounds.size.height - 100)
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    func getAllMovies() {
-        let group = DispatchGroup()
-
-        group.enter()
-        loadDetail {
-            group.leave()
-        }
-        
-        group.enter()
-        loadSimilarMovies {
-            group.leave()
-        }
-
-        group.notify(queue: .main) { [weak self] in
-            self?.recommendationCollectionView.reloadData()
-            self?.updateUI()
-        }
-    }
-    
-    func loadDetail(completion: @escaping () -> ()) {
-        NetworkManager.shared.getMovieDetail(movieId: movieId) { result in
-            switch result {
-            case .success(let success):
-                self.movieDetail = success
-            case .failure(let failure):
-                print(failure.localizedDescription)
+    func updateUI(backdropUrl: URL, movieTitle: String, dateText: String, overviewText: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.backgroundImageView.kf.setImage(with: backdropUrl)
+            self?.title = movieTitle
+            self?.dateLabel.text = dateText
+            self?.overviewLabel.text = overviewText
+            
+            if (self?.overviewLabel.bounds.size.height)! > 100 {
+                self?.contentViewHeight.constant = (self?.view.frame.size.height)! + ((self?.overviewLabel.bounds.size.height)! - 100)
+                self?.view.layoutIfNeeded()
             }
-            completion()
-        }
-    }
-    
-    func loadSimilarMovies(completion: @escaping () -> ()) {
-        NetworkManager.shared.getSimilarMovies(movieId: movieId) { result in
-            switch result {
-            case .success(let success):
-                self.similarMovies = success
-            case .failure(let failure):
-                print(failure.localizedDescription)
-            }
-            completion()
         }
     }
     
@@ -116,15 +72,11 @@ final class MovieDetailViewController: UIViewController {
         recommendationCollectionView.register(nib: UINib(nibName: String(describing: HorizontalTrendingCell.self), bundle: nil), forCellWithClass: HorizontalTrendingCell.self)
     }
     
-    @IBAction func seeMoreButtonTapped(_ sender: UIButton) {
-        if let url = URL(string: movieDetail?.homepage ?? "https://en.wikipedia.org/wiki/HTTP_404") {
-            UIApplication.shared.open(url)
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            self?.recommendationCollectionView.reloadData()
         }
     }
-}
-
-extension MovieDetailViewController: MovieDetailViewProtocol {
-    
 }
 
 extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -138,22 +90,26 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return similarMovies?.results.count ?? 0
+        return presenter?.numberOfRows(in: 0) ?? 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return presenter?.numberOfSection() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
         
-        cell.movieTitleLabel.text = similarMovies?.results[indexPath.row].title
-        cell.movieReleaseDateLabel.text = similarMovies?.results[indexPath.row].releaseDate
-        cell.movieImageView.kf.setImage(with: similarMovies?.results[indexPath.row].posterURL)
+        cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
+        cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate
+        cell.movieImageView.kf.setImage(with: presenter?.cellForRow(at: indexPath)?.posterURL)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = similarMovies?.results[indexPath.row].id ?? movieId
-        let movieDetail = MovieDetailRouter.createModule(movieId: id)
+        let movieId = presenter?.cellForRow(at: indexPath)?.id ?? 742536
+        let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
         present(movieDetail, animated: true)
     }
 }
