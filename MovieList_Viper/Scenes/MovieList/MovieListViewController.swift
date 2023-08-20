@@ -18,6 +18,7 @@ final class MovieListViewController: UIViewController {
     var trendingMovies: MovieListModel?
     var popularMovies: MovieListModel?
     var upcomingMovies: MovieListModel?
+    var recommendationsMovies: MovieListModel?
     
     var presenter: MovieListPresenter?
     
@@ -48,6 +49,11 @@ final class MovieListViewController: UIViewController {
 
         group.enter()
         loadUpcomingMovies {
+            group.leave()
+        }
+        
+        group.enter()
+        loadRecommendations {
             group.leave()
         }
 
@@ -85,6 +91,19 @@ final class MovieListViewController: UIViewController {
             switch result {
             case .success(let success):
                 self?.upcomingMovies = success
+            case .failure(let failure):
+                print(failure.localizedDescription)
+            }
+            completion()
+        }
+    }
+    
+    func loadRecommendations(completion: @escaping () -> ()) {
+        //UserDefaults'dan alınacak
+        NetworkManager.shared.getRecomendationsMovies(movieId: 569094) { result in
+            switch result {
+            case .success(let success):
+                self.recommendationsMovies = success
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
@@ -145,7 +164,7 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -160,6 +179,8 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
             cell.movieResult = popularMovies?.results ?? []
         case 2:
             cell.movieResult = upcomingMovies?.results ?? []
+        case 3:
+            cell.movieResult = recommendationsMovies?.results ?? []
         default:
             break
         }
@@ -171,18 +192,8 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self, for: indexPath)
         
-        header.setupCell()
-        //Presenter
-        switch indexPath.section {
-        case 0:
-            header.headerText = "Trending Movies"
-        case 1:
-            header.headerText = "Popular Movies"
-        case 2:
-            header.headerText = "Upcoming Movies"
-        default:
-            break
-        }
+        header.setupCell(at: indexPath)
+        //Presenter ???
         
         return header
     }

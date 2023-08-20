@@ -53,7 +53,6 @@
 		C49884632A90072900D54372 /* HorizontalTrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49884622A90072900D54372 /* HorizontalTrendingCell.swift */; };
 		C49884642A90072900D54372 /* HorizontalTrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49884622A90072900D54372 /* HorizontalTrendingCell.swift */; };
 		C49884662A90077A00D54372 /* HorizontalTrendingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49884652A90077A00D54372 /* HorizontalTrendingCell.xib */; };
-		C49884692A90081600D54372 /* MovieCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C49884682A90081600D54372 /* MovieCollectionReusableView.xib */; };
 		C498846B2A90082F00D54372 /* MovieCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */; };
 		C498846C2A90082F00D54372 /* MovieCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */; };
 		C498846E2A900D6100D54372 /* VerticalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C498846D2A900D6100D54372 /* VerticalCollectionCell.swift */; };
@@ -111,7 +110,6 @@
 		C498845F2A8FFF3500D54372 /* MovieListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieListViewController.xib; sourceTree = "<group>"; };
 		C49884622A90072900D54372 /* HorizontalTrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTrendingCell.swift; sourceTree = "<group>"; };
 		C49884652A90077A00D54372 /* HorizontalTrendingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalTrendingCell.xib; sourceTree = "<group>"; };
-		C49884682A90081600D54372 /* MovieCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionReusableView.xib; sourceTree = "<group>"; };
 		C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionReusableView.swift; sourceTree = "<group>"; };
 		C498846D2A900D6100D54372 /* VerticalCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionCell.swift; sourceTree = "<group>"; };
 		C49884702A900D9900D54372 /* VerticalCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerticalCollectionCell.xib; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 				C498846D2A900D6100D54372 /* VerticalCollectionCell.swift */,
 				C49884702A900D9900D54372 /* VerticalCollectionCell.xib */,
 				C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */,
-				C49884682A90081600D54372 /* MovieCollectionReusableView.xib */,
 			);
 			path = _components;
 			sourceTree = "<group>";
@@ -415,7 +412,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C486440B2A916FCD003B8280 /* MovieDetailViewController.xib in Resources */,
-				C49884692A90081600D54372 /* MovieCollectionReusableView.xib in Resources */,
 				C49884662A90077A00D54372 /* HorizontalTrendingCell.xib in Resources */,
 				C49884602A8FFF3500D54372 /* MovieListViewController.xib in Resources */,
 				C49884352A8FFE3A00D54372 /* LaunchScreen.storyboard in Resources */,

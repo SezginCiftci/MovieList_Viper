@@ -24,7 +24,7 @@ final class MovieDetailViewController: UIViewController {
     var presenter: MovieDetailPresenterProtocol?
     
     var movieDetail: MovieDetailModel?
-    var movieRecommendations: MovieListModel?
+    var similarMovies: MovieListModel?
     
     var movieId: Int
     
@@ -74,9 +74,9 @@ final class MovieDetailViewController: UIViewController {
         loadDetail {
             group.leave()
         }
-
+        
         group.enter()
-        loadRecommendations {
+        loadSimilarMovies {
             group.leave()
         }
 
@@ -98,11 +98,11 @@ final class MovieDetailViewController: UIViewController {
         }
     }
     
-    func loadRecommendations(completion: @escaping () -> ()) {
-        NetworkManager.shared.getRecomendationsMovies(movieId: movieId) { result in
+    func loadSimilarMovies(completion: @escaping () -> ()) {
+        NetworkManager.shared.getSimilarMovies(movieId: movieId) { result in
             switch result {
             case .success(let success):
-                self.movieRecommendations = success
+                self.similarMovies = success
             case .failure(let failure):
                 print(failure.localizedDescription)
             }
@@ -138,21 +138,21 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieRecommendations?.results.count ?? 0
+        return similarMovies?.results.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
         
-        cell.movieTitleLabel.text = movieRecommendations?.results[indexPath.row].title
-        cell.movieReleaseDateLabel.text = movieRecommendations?.results[indexPath.row].releaseDate
-        cell.movieImageView.kf.setImage(with: movieRecommendations?.results[indexPath.row].posterURL)
+        cell.movieTitleLabel.text = similarMovies?.results[indexPath.row].title
+        cell.movieReleaseDateLabel.text = similarMovies?.results[indexPath.row].releaseDate
+        cell.movieImageView.kf.setImage(with: similarMovies?.results[indexPath.row].posterURL)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = movieRecommendations?.results[indexPath.row].id ?? movieId
+        let id = similarMovies?.results[indexPath.row].id ?? movieId
         let movieDetail = MovieDetailRouter.createModule(movieId: id)
         present(movieDetail, animated: true)
     }
