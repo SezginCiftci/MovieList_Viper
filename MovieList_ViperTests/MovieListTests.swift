@@ -15,7 +15,7 @@ final class MovieList_Test: XCTestCase {
     var interactor: MockMovieListInteractor!
     var router: MockMovieListRouter!
     
-    override func setUp() { //Neden class'ı kaldırdık ???
+    override func setUp() {
         super.setUp()
         
         sut = .init()
@@ -30,7 +30,7 @@ final class MovieList_Test: XCTestCase {
         sut.interactor = interactor
     }
     
-    override func tearDown() { //Neden class'ı kaldırdık ???
+    override func tearDown() {
         super.tearDown()
     }
     
