@@ -8,6 +8,8 @@
 import UIKit
 
 protocol MovieListRouterProtocol {
+    var view: UIViewController? { get set }
+    
     func routeToDetail(movieId: Int)
 }
 

@@ -8,6 +8,8 @@
 import UIKit
 
 protocol MovieListViewProtocol: AnyObject {
+    var presenter: MovieListPresenterProtocol? { get set }
+    
     func prepareNavigationBar()
     func prepareCollectionView()
     func reloadCollectionView()
@@ -17,7 +19,7 @@ final class MovieListViewController: UIViewController {
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
     
-    var presenter: MovieListPresenter?
+    var presenter: MovieListPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

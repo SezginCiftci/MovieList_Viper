@@ -34,10 +34,10 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     var interactor: MovieListInteractorProtocol?
     var router: MovieListRouterProtocol?
     
-    private var trendingMovies: MovieListModel?
-    private var popularMovies: MovieListModel?
-    private var upcomingMovies: MovieListModel?
-    private var recommendationsMovies: MovieListModel?
+    var trendingMovies: MovieListModel?
+    var popularMovies: MovieListModel?
+    var upcomingMovies: MovieListModel?
+    var recommendationsMovies: MovieListModel?
     
     func viewDidLoad() {
         interactor?.fetchMainPageMovies()

@@ -8,6 +8,8 @@
 import Foundation
 
 protocol MovieListInteractorProtocol {
+    var presenter: MovieListInteractorOutputProtocol? { get set }
+    
     func fetchMainPageMovies()
     func saveSeenMovie(movieId: Int)
 }

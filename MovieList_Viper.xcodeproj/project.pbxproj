@@ -11,6 +11,10 @@
 		C45273262A90CD7800C56B32 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273242A90CD7800C56B32 /* Endpoint.swift */; };
 		C45273282A90D87000C56B32 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273272A90D87000C56B32 /* NetworkManager.swift */; };
 		C45273292A90D87000C56B32 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273272A90D87000C56B32 /* NetworkManager.swift */; };
+		C463E32B2A95216300561EC6 /* MovieListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463E32A2A95216300561EC6 /* MovieListTests.swift */; };
+		C463E32D2A9522C100561EC6 /* MockMovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463E32C2A9522C100561EC6 /* MockMovieListView.swift */; };
+		C463E32F2A95231600561EC6 /* MockMovieListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463E32E2A95231600561EC6 /* MockMovieListRouter.swift */; };
+		C463E3312A95236000561EC6 /* MockMovieListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C463E3302A95236000561EC6 /* MockMovieListInteractor.swift */; };
 		C48643B42A90F761003B8280 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48643B32A90F761003B8280 /* UICollectionView+.swift */; };
 		C48643B52A90F761003B8280 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48643B32A90F761003B8280 /* UICollectionView+.swift */; };
 		C48643B72A90F77E003B8280 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48643B62A90F77E003B8280 /* UIView+.swift */; };
@@ -81,6 +85,10 @@
 /* Begin PBXFileReference section */
 		C45273242A90CD7800C56B32 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C45273272A90D87000C56B32 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C463E32A2A95216300561EC6 /* MovieListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTests.swift; sourceTree = "<group>"; };
+		C463E32C2A9522C100561EC6 /* MockMovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieListView.swift; sourceTree = "<group>"; };
+		C463E32E2A95231600561EC6 /* MockMovieListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieListRouter.swift; sourceTree = "<group>"; };
+		C463E3302A95236000561EC6 /* MockMovieListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMovieListInteractor.swift; sourceTree = "<group>"; };
 		C48643B32A90F761003B8280 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		C48643B62A90F77E003B8280 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		C48643ED2A913BBF003B8280 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -236,6 +244,10 @@
 			isa = PBXGroup;
 			children = (
 				C498843F2A8FFE3A00D54372 /* MovieList_ViperTests.swift */,
+				C463E32A2A95216300561EC6 /* MovieListTests.swift */,
+				C463E32C2A9522C100561EC6 /* MockMovieListView.swift */,
+				C463E32E2A95231600561EC6 /* MockMovieListRouter.swift */,
+				C463E3302A95236000561EC6 /* MockMovieListInteractor.swift */,
 			);
 			path = MovieList_ViperTests;
 			sourceTree = "<group>";
@@ -481,11 +493,15 @@
 				C498846C2A90082F00D54372 /* MovieCollectionReusableView.swift in Sources */,
 				C48644062A916F6D003B8280 /* MovieDetailEntity.swift in Sources */,
 				C48644122A9170AD003B8280 /* MovieDetailInteractor.swift in Sources */,
+				C463E3312A95236000561EC6 /* MockMovieListInteractor.swift in Sources */,
 				C486441B2A917DA3003B8280 /* DetailCollectionCell.swift in Sources */,
+				C463E32D2A9522C100561EC6 /* MockMovieListView.swift in Sources */,
 				C48643B52A90F761003B8280 /* UICollectionView+.swift in Sources */,
 				C45273292A90D87000C56B32 /* NetworkManager.swift in Sources */,
+				C463E32F2A95231600561EC6 /* MockMovieListRouter.swift in Sources */,
 				C48643F52A916BD3003B8280 /* MovieListPresenter.swift in Sources */,
 				C49884642A90072900D54372 /* HorizontalTrendingCell.swift in Sources */,
+				C463E32B2A95216300561EC6 /* MovieListTests.swift in Sources */,
 				C48643B82A90F77E003B8280 /* UIView+.swift in Sources */,
 				C45273262A90CD7800C56B32 /* Endpoint.swift in Sources */,
 				C498846F2A900D6100D54372 /* VerticalCollectionCell.swift in Sources */,
