@@ -144,6 +144,36 @@ final class MovieList_Test: XCTestCase {
         XCTAssertGreaterThan(sut.cellForRow(at: IndexPath(row: 0, section: 0))?.count ?? 0, 0)
     }
     
+    func test_didSaveLastSeen() {
+        XCTAssertFalse(interactor.invokedSaveSeenMovie)
+        XCTAssertEqual(interactor.invokedSaveSeenMovieCount, 0)
+        XCTAssertNil(interactor.invokedSaveSeenMovieParameters)
+        XCTAssertEqual(interactor.invokedSaveSeenMovieParametersList.count, 0)
+        
+        sut.didSaveLastSeen(movieId: 11111)
+        
+        XCTAssertTrue(interactor.invokedSaveSeenMovie)
+        XCTAssertEqual(interactor.invokedSaveSeenMovieCount, 1)
+        XCTAssertNotNil(interactor.invokedSaveSeenMovieParameters?.movieId)
+        XCTAssertEqual(interactor.invokedSaveSeenMovieParameters?.movieId, 11111)
+        XCTAssertEqual(interactor.invokedSaveSeenMovieParametersList.count, 1)
+    }
+    
+    func test_didSelectMovie() {
+        XCTAssertFalse(router.invokedRouteToDetail)
+        XCTAssertEqual(router.invokedRouteToDetailCount, 0)
+        XCTAssertNil(router.invokedRouteToDetailParameters)
+        XCTAssertEqual(router.invokedRouteToDetailParametersList.count, 0)
+        
+        sut.didSelectMovie(movieId: 11111)
+        
+        XCTAssertTrue(router.invokedRouteToDetail)
+        XCTAssertEqual(router.invokedRouteToDetailCount, 1)
+        XCTAssertNotNil(router.invokedRouteToDetailParameters?.movieId)
+        XCTAssertEqual(router.invokedRouteToDetailParameters?.movieId, 11111)
+        XCTAssertEqual(router.invokedRouteToDetailParametersList.count, 1)
+    }
+    
     func test_numberItemsInSection() {
         //TODO: -
     }

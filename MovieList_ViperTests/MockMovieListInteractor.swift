@@ -55,8 +55,6 @@ final class MockMovieListInteractor: MovieListInteractorProtocol {
         invokedSaveSeenMovieParametersList.append((movieId, ()))
     }
     
-    
-    
 }
 
 extension MockMovieListInteractor {
