@@ -32,6 +32,10 @@ final class MovieList_Test: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        view = nil
+        interactor = nil
+        router = nil
+        sut = nil
     }
     
     func test_viewDidLoad() {
