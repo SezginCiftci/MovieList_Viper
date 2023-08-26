@@ -18,6 +18,7 @@ protocol MovieListPresenterProtocol {
     func numberItems(in section: Int) -> Int
     func didSaveLastSeen(movieId: Int)
     func didSelectMovie(movieId: Int)
+    func didTappedSeeMore(indexPath: IndexPath)
 }
 
 protocol MovieListInteractorOutputProtocol: AnyObject {
@@ -73,6 +74,19 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     
     func didSelectMovie(movieId: Int) {
         router?.routeToDetail(movieId: movieId)
+    }
+    
+    func didTappedSeeMore(indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            router?.routeToSeeMore(endPoint: .getTrending(pageIndex: 1))
+        case 1:
+            router?.routeToSeeMore(endPoint: .getPopular(pageIndex: 1))
+        case 2:
+            router?.routeToSeeMore(endPoint: .getUpcoming(pageIndex: 1))
+        default:
+            break
+        }
     }
 }
 

@@ -79,6 +79,10 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
         return 10
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width - 20), height: (collectionView.frame.height - 20)/3)
     }
@@ -101,11 +105,16 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self, for: indexPath)
         header.setupCell(at: indexPath)
+        header.delegate = self
         
         return header
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+}
+
+//MARK: - Header Delegate Methods
+extension MovieListViewController: MovieCollectionReusableViewDelegate {
+    func didTapSeeMore(indexPath: IndexPath) {
+        presenter?.didTappedSeeMore(indexPath: indexPath)
     }
 }

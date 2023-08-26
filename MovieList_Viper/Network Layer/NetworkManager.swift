@@ -22,15 +22,15 @@ final class NetworkManager: NetworkManagerProtocol {
     private init() {}
     
     func getTrendingMovies(pageIndex: Int, completion: @escaping (Result<MovieListModel, Error>) -> ()) {
-        request(.getTrending(pageIndex: 1), completion: completion)
+        request(.getTrending(pageIndex: pageIndex), completion: completion)
     }
     
     func getPopularMovies(pageIndex: Int, completion: @escaping (Result<MovieListModel, Error>) -> ()) {
-        request(.getPopular(pageIndex: 1), completion: completion)
+        request(.getPopular(pageIndex: pageIndex), completion: completion)
     }
     
     func getUpcomingMovies(pageIndex: Int, completion: @escaping (Result<MovieListModel, Error>) -> ()) {
-        request(.getUpcoming(pageIndex: 1), completion: completion)
+        request(.getUpcoming(pageIndex: pageIndex), completion: completion)
     }
     
     func getSimilarMovies(movieId: Int, completion: @escaping (Result<MovieListModel, Error>) -> ()) {

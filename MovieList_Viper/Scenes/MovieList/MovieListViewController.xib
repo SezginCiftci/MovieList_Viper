@@ -31,7 +31,7 @@
                 </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="collectionBg"/>
+            <color key="backgroundColor" name="generalBg"/>
             <constraints>
                 <constraint firstItem="7Ah-oC-h1C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CiC-QT-alQ"/>
                 <constraint firstItem="7Ah-oC-h1C" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="THU-6F-CbC"/>
@@ -43,11 +43,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="collectionBg">
-            <color red="0.26666668059999998" green="0.59215688710000003" blue="0.79215681550000006" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <namedColor name="generalBg">
-            <color red="0.066666662690000003" green="0.11372549830000001" blue="0.21568629149999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.067000001668930054" green="0.11400000005960464" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
