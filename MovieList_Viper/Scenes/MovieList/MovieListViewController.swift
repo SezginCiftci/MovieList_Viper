@@ -12,12 +12,16 @@ protocol MovieListViewProtocol: AnyObject {
     
     func prepareNavigationBar()
     func prepareCollectionView()
+    func loadingStarted()
+    func loadingEnded()
     func reloadCollectionView()
+    func showAlert(_ errorMessage: String, completion: @escaping ()->())
 }
 
 final class MovieListViewController: UIViewController {
     
     @IBOutlet weak var mainCollectionView: UICollectionView!
+    @IBOutlet weak var loadingAnimation: UIActivityIndicatorView!
     
     var presenter: MovieListPresenterProtocol?
     
@@ -29,6 +33,21 @@ final class MovieListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        presenter?.viewDidDisappear()
+    }
+    
+    func loadingStarted() {
+        loadingAnimation.startAnimating()
+    }
+    
+    func loadingEnded() {
+        DispatchQueue.main.async { [weak self] in
+            self?.loadingAnimation.stopAnimating()
+        }
     }
 }
 
@@ -63,7 +82,6 @@ extension MovieListViewController: MovieListViewProtocol {
 //MARK: - VerticalCollectionCellDelegate
 extension MovieListViewController: VerticalCollectionCellDelegate {
     func didSelectMovie(with movieId: Int) {
-        presenter?.didSaveLastSeen(movieId: movieId)
         presenter?.didSelectMovie(movieId: movieId)
     }
 }

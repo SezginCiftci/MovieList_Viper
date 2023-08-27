@@ -13,19 +13,21 @@ protocol MovieListPresenterProtocol {
     
     func viewDidLoad()
     func viewWillAppear()
+    func viewDidDisappear()
     func cellForRow(at index: IndexPath) -> [Movie]?
     func numberOfSections() -> Int
     func numberItems(in section: Int) -> Int
-    func didSaveLastSeen(movieId: Int)
     func didSelectMovie(movieId: Int)
     func didTappedSeeMore(cellType: MainCollectionCellTypes)
 }
 
 protocol MovieListInteractorOutputProtocol: AnyObject {
-    func didFetchTrendingMoviesSucces(movie: MovieListModel?)
-    func didFetchPopularMoviesSucces(movie: MovieListModel?)
-    func didFetchUpcomingMoviesSucces(movie: MovieListModel?)
-    func didFetchMoviesError()
+    func didFetchTrendingMoviesSuccess(movie: MovieListModel?)
+    func didFetchPopularMoviesSuccess(movie: MovieListModel?)
+    func didFetchUpcomingMoviesSuccess(movie: MovieListModel?)
+    func didFetchTrendingMoviesFailure(errorMessage: String)
+    func didFetchPopularMoviesFailure(errorMessage: String)
+    func didFetchUpcomingMoviesFailure(errorMessage: String)
 }
 
 final class MovieListPresenter: MovieListPresenterProtocol {
@@ -37,14 +39,29 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     var trendingMovies: MovieListModel?
     var popularMovies: MovieListModel?
     var upcomingMovies: MovieListModel?
+    var serviceResponseCounter: Int = 0 {
+        didSet {
+            if serviceResponseCounter >= 3 {
+                view?.reloadCollectionView()
+                view?.loadingEnded()
+            }
+        }
+    }
     
     func viewDidLoad() {
-        interactor?.fetchMainPageMovies()
         view?.prepareCollectionView()
+        view?.loadingStarted()
+        interactor?.loadTrendingMovies()
+        interactor?.loadPopularMovies()
+        interactor?.loadUpcomingMovies()
     }
     
     func viewWillAppear() {
         view?.prepareNavigationBar()
+    }
+    
+    func viewDidDisappear() {
+        serviceResponseCounter = 0
     }
     
     func cellForRow(at index: IndexPath) -> [Movie]? {
@@ -58,15 +75,11 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     }
     
     func numberItems(in section: Int) -> Int {
-        return 1 //TODO:
+        return 1
     }
     
     func numberOfSections() -> Int {
-        return 3 //TODO:
-    }
-    
-    func didSaveLastSeen(movieId: Int) {
-        interactor?.saveSeenMovie(movieId: movieId)
+        return MainCollectionCellTypes.allCases.count
     }
     
     func didSelectMovie(movieId: Int) {
@@ -80,20 +93,31 @@ final class MovieListPresenter: MovieListPresenterProtocol {
 }
 
 extension MovieListPresenter: MovieListInteractorOutputProtocol {
-    func didFetchTrendingMoviesSucces(movie: MovieListModel?) {
+    func didFetchTrendingMoviesSuccess(movie: MovieListModel?) {
         trendingMovies = movie
-        view?.reloadCollectionView()
+        serviceResponseCounter += 1
     }
     
-    func didFetchPopularMoviesSucces(movie: MovieListModel?) {
+    func didFetchPopularMoviesSuccess(movie: MovieListModel?) {
         popularMovies = movie
+        serviceResponseCounter += 1
     }
     
-    func didFetchUpcomingMoviesSucces(movie: MovieListModel?) {
+    func didFetchUpcomingMoviesSuccess(movie: MovieListModel?) {
         upcomingMovies = movie
+        serviceResponseCounter += 1
     }
     
-    func didFetchMoviesError() {
-        //TODO:
+    func didFetchTrendingMoviesFailure(errorMessage: String) {
+        view?.showAlert("Trending Movies Error: \(errorMessage)", completion: {})
     }
+    
+    func didFetchPopularMoviesFailure(errorMessage: String) {
+        view?.showAlert("Popular Movies Error: \(errorMessage)", completion: {})
+    }
+    
+    func didFetchUpcomingMoviesFailure(errorMessage: String) {
+        view?.showAlert("Popular Movies Error: \(errorMessage)", completion: {})
+    }
+    
 }

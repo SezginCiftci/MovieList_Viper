@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MainCollectionCellTypes: Int {
+enum MainCollectionCellTypes: Int, CaseIterable {
     case trendingCell = 0
     case popular
     case upcoming
