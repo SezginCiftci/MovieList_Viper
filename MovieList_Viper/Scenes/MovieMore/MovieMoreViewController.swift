@@ -76,6 +76,10 @@ final class MovieMoreViewController: UIViewController, MovieMoreViewProtocol {
         }
     }
     
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
 }
 
 //MARK: - CollectionView Delegate

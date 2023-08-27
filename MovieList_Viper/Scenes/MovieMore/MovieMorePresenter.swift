@@ -31,20 +31,20 @@ final class MovieMorePresenter: MovieMorePresenterProtocol {
     var router: MovieMoreRouterProtocol?
     var interactor: MovieMoreInteractorProtocol?
     
-    var endPoint: Endpoint
+    var cellType: MainCollectionCellTypes
     var movies: [Movie] = []
     var pageCounter: Int = 1
     var searchText: String?
     
-    init(endPoint: Endpoint) {
-        self.endPoint = endPoint
+    init(cellType: MainCollectionCellTypes) {
+        self.cellType = cellType
     }
     
     func viewDidLoad() {
         view?.prepareSearchBar()
         view?.prepareCollectionView()
         view?.prepareSearchBarAccessoryView()
-        interactor?.fetchMoreMovies(endPoint: endPoint, pageIndex: 1)
+        interactor?.fetchMoreMovies(cellType: cellType, pageIndex: 1)
     }
     
     func viewWillAppear() {
@@ -62,7 +62,7 @@ final class MovieMorePresenter: MovieMorePresenterProtocol {
     func willDisplayNextPageIfNeeded(at indexPath: IndexPath) {
         pageCounter += 1
         if let numberOfRows = numberOfRows(in: indexPath.section), (indexPath.row == numberOfRows - 1 ) {
-            interactor?.fetchMoreMovies(endPoint: endPoint, pageIndex: pageCounter)
+            interactor?.fetchMoreMovies(cellType: cellType, pageIndex: pageCounter)
         }
     }
     
@@ -88,22 +88,13 @@ extension MovieMorePresenter: MovieMoreInteractorOutputProtocol {
     func handleMoviesWithSuccess(_ movies: MovieListModel?) {
         self.movies.append(contentsOf: movies?.results ?? [])
         view?.reloadCollectionView()
-        switch endPoint {
-        case .getTrending:
-            view?.updateTitleLabel(with: "Trending Movies")
-        case .getPopular:
-            view?.updateTitleLabel(with: "Popular Movies")
-        case .getUpcoming:
-            view?.updateTitleLabel(with: "Upcoming Movies")
-        default:
-            break
-        }
+        view?.updateTitleLabel(with: cellType.cellTypes)
     }
     
     func handleMoviesWithFailure(_ errorMessage: String) {
         view?.showAlert(errorMessage, completion: { [weak self] in
             guard let self else { return }
-            interactor?.fetchMoreMovies(endPoint: self.endPoint, pageIndex: pageCounter)
+            interactor?.fetchMoreMovies(cellType: cellType, pageIndex: pageCounter)
         })
     }
 }

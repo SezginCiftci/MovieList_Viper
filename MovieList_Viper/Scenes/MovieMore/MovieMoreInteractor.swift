@@ -10,23 +10,21 @@ import Foundation
 protocol MovieMoreInteractorProtocol {
     var presenter: MovieMoreInteractorOutputProtocol? { get set }
     
-    func fetchMoreMovies(endPoint: Endpoint, pageIndex: Int)
+    func fetchMoreMovies(cellType: MainCollectionCellTypes, pageIndex: Int)
 }
 
 
 final class MovieMoreInteractor: MovieMoreInteractorProtocol {
     weak var presenter: MovieMoreInteractorOutputProtocol?
     
-    func fetchMoreMovies(endPoint: Endpoint, pageIndex: Int) {
-        switch endPoint {
-        case .getTrending:
+    func fetchMoreMovies(cellType: MainCollectionCellTypes, pageIndex: Int) {
+        switch cellType {
+        case .trendingCell:
             loadTrendingMovies(with: pageIndex)
-        case .getPopular:
+        case .popular:
             loadPopularMovies(with: pageIndex)
-        case .getUpcoming:
-            self.loadUpcomingMovies(with: pageIndex)
-        default:
-            break
+        case .upcoming:
+            loadUpcomingMovies(with: pageIndex)
         }
     }
     

@@ -17,10 +17,10 @@ final class MovieMoreRouter: MovieMoreRouterProtocol {
     
     weak var view: UIViewController?
     
-    class func createModule(with endpoint: Endpoint) -> MovieMoreViewController {
+    class func createModule(with cellType: MainCollectionCellTypes) -> MovieMoreViewController {
         let view = MovieMoreViewController()
         let interactor = MovieMoreInteractor()
-        let presenter = MovieMorePresenter(endPoint: endpoint)
+        let presenter = MovieMorePresenter(cellType: cellType)
         let router = MovieMoreRouter()
         
         view.presenter = presenter

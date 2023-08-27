@@ -18,14 +18,13 @@ protocol MovieListPresenterProtocol {
     func numberItems(in section: Int) -> Int
     func didSaveLastSeen(movieId: Int)
     func didSelectMovie(movieId: Int)
-    func didTappedSeeMore(indexPath: IndexPath)
+    func didTappedSeeMore(cellType: MainCollectionCellTypes)
 }
 
 protocol MovieListInteractorOutputProtocol: AnyObject {
     func didFetchTrendingMoviesSucces(movie: MovieListModel?)
     func didFetchPopularMoviesSucces(movie: MovieListModel?)
     func didFetchUpcomingMoviesSucces(movie: MovieListModel?)
-    func didFetchRecommendationMoviesSucces(movie: MovieListModel?)
     func didFetchMoviesError()
 }
 
@@ -38,7 +37,6 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     var trendingMovies: MovieListModel?
     var popularMovies: MovieListModel?
     var upcomingMovies: MovieListModel?
-    var recommendationsMovies: MovieListModel?
     
     func viewDidLoad() {
         interactor?.fetchMainPageMovies()
@@ -54,7 +52,6 @@ final class MovieListPresenter: MovieListPresenterProtocol {
         case 0: return trendingMovies?.results
         case 1: return popularMovies?.results
         case 2: return upcomingMovies?.results
-        case 3: return recommendationsMovies?.results
         default:
             return nil
         }
@@ -65,7 +62,7 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     }
     
     func numberOfSections() -> Int {
-        return 4 //TODO:
+        return 3 //TODO:
     }
     
     func didSaveLastSeen(movieId: Int) {
@@ -76,18 +73,10 @@ final class MovieListPresenter: MovieListPresenterProtocol {
         router?.routeToDetail(movieId: movieId)
     }
     
-    func didTappedSeeMore(indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            router?.routeToSeeMore(endPoint: .getTrending(pageIndex: 1))
-        case 1:
-            router?.routeToSeeMore(endPoint: .getPopular(pageIndex: 1))
-        case 2:
-            router?.routeToSeeMore(endPoint: .getUpcoming(pageIndex: 1))
-        default:
-            break
-        }
+    func didTappedSeeMore(cellType: MainCollectionCellTypes) {
+        router?.routeToSeeMore(cellType: cellType)
     }
+    
 }
 
 extension MovieListPresenter: MovieListInteractorOutputProtocol {
@@ -102,10 +91,6 @@ extension MovieListPresenter: MovieListInteractorOutputProtocol {
     
     func didFetchUpcomingMoviesSucces(movie: MovieListModel?) {
         upcomingMovies = movie
-    }
-    
-    func didFetchRecommendationMoviesSucces(movie: MovieListModel?) {
-        recommendationsMovies = movie
     }
     
     func didFetchMoviesError() {

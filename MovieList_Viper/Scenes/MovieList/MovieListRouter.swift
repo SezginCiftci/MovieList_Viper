@@ -11,7 +11,7 @@ protocol MovieListRouterProtocol {
     var view: UIViewController? { get set }
     
     func routeToDetail(movieId: Int)
-    func routeToSeeMore(endPoint: Endpoint)
+    func routeToSeeMore(cellType: MainCollectionCellTypes)
 }
 
 final class MovieListRouter: MovieListRouterProtocol {
@@ -39,8 +39,8 @@ final class MovieListRouter: MovieListRouterProtocol {
         view?.navigationController?.pushViewController(movieDetail, animated: true)
     }
     
-    func routeToSeeMore(endPoint: Endpoint) {
-        let vc = MovieMoreRouter.createModule(with: endPoint)
+    func routeToSeeMore(cellType: MainCollectionCellTypes) {
+        let vc = MovieMoreRouter.createModule(with: cellType)
         vc.modalPresentationStyle = .fullScreen
         view?.present(vc, animated: true)
     }

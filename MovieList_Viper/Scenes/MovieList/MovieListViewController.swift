@@ -116,7 +116,7 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
 
 //MARK: - Header Delegate Methods
 extension MovieListViewController: MovieCollectionReusableViewDelegate {
-    func didTapSeeMore(indexPath: IndexPath) {
-        presenter?.didTappedSeeMore(indexPath: indexPath)
+    func didTapSeeMore(cellType: MainCollectionCellTypes) {
+        presenter?.didTappedSeeMore(cellType: cellType)
     }
 }

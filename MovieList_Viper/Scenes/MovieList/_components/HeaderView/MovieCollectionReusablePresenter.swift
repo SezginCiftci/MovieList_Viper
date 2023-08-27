@@ -32,7 +32,7 @@ protocol MovieCollectionReusablePresenterInterface {
 }
 
 protocol MovieCollectionReusableViewDelegate {
-    func didTapSeeMore(indexPath: IndexPath)
+    func didTapSeeMore(cellType: MainCollectionCellTypes)
 }
 
 final class MovieCollectionReusablePresenter: MovieCollectionReusablePresenterInterface {
@@ -48,17 +48,17 @@ final class MovieCollectionReusablePresenter: MovieCollectionReusablePresenterIn
     }
     
     func loadUI() {
-        view?.configureUI(with: setCellType()?.cellTypes ?? "Movies")
+        view?.configureUI(with: setCellType().cellTypes)
     }
     
     func openSeeMore() {
-        delegate.didTapSeeMore(indexPath: indexPath)
+        delegate.didTapSeeMore(cellType: setCellType())
     }
     
-    private func setCellType() -> MainCollectionCellTypes? {
+    private func setCellType() -> MainCollectionCellTypes {
         if let cellType = MainCollectionCellTypes(rawValue: indexPath.section) {
             return cellType
         }
-        return nil
+        return .trendingCell
     }
 }

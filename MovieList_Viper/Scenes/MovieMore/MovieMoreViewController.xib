@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +42,7 @@
                     </userDefinedRuntimeAttributes>
                 </searchBar>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending Movies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0u-1P-wjj">
-                    <rect key="frame" x="20" y="79" width="353" height="30"/>
+                    <rect key="frame" x="124.66666666666669" y="79" width="144" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="C22-qN-hZH"/>
                     </constraints>
@@ -60,19 +61,34 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9F8-nq-sUQ">
+                    <rect key="frame" x="20" y="74" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="bgd-3a-her"/>
+                        <constraint firstAttribute="width" constant="35" id="eUH-Rn-23J"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain">
+                        <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="exitButtonTapped:" destination="-1" eventType="touchUpInside" id="b1q-tA-x4T"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="eXA-H5-e6a"/>
             <color key="backgroundColor" name="generalBg"/>
             <constraints>
+                <constraint firstItem="s0u-1P-wjj" firstAttribute="centerX" secondItem="6CV-UP-BPo" secondAttribute="centerX" id="1Yg-DM-MOt"/>
                 <constraint firstItem="Dvh-mP-gTc" firstAttribute="leading" secondItem="eXA-H5-e6a" secondAttribute="leading" id="789-Gb-QPW"/>
                 <constraint firstItem="sH9-oX-I40" firstAttribute="top" secondItem="s0u-1P-wjj" secondAttribute="bottom" id="Hpg-zJ-4OM"/>
                 <constraint firstItem="eXA-H5-e6a" firstAttribute="bottom" secondItem="Dvh-mP-gTc" secondAttribute="bottom" id="O0Q-be-JXd"/>
                 <constraint firstItem="s0u-1P-wjj" firstAttribute="top" secondItem="eXA-H5-e6a" secondAttribute="top" constant="20" id="P2y-Su-s8i"/>
                 <constraint firstItem="eXA-H5-e6a" firstAttribute="trailing" secondItem="Dvh-mP-gTc" secondAttribute="trailing" id="Rk8-hX-Kh4"/>
-                <constraint firstItem="eXA-H5-e6a" firstAttribute="trailing" secondItem="s0u-1P-wjj" secondAttribute="trailing" constant="20" id="cv8-bf-44j"/>
                 <constraint firstItem="sH9-oX-I40" firstAttribute="leading" secondItem="eXA-H5-e6a" secondAttribute="leading" id="fCf-oS-1DZ"/>
-                <constraint firstItem="s0u-1P-wjj" firstAttribute="leading" secondItem="eXA-H5-e6a" secondAttribute="leading" constant="20" id="hqO-oN-WHV"/>
+                <constraint firstItem="9F8-nq-sUQ" firstAttribute="bottom" secondItem="s0u-1P-wjj" secondAttribute="bottom" id="irt-hc-py4"/>
                 <constraint firstItem="Dvh-mP-gTc" firstAttribute="top" secondItem="sH9-oX-I40" secondAttribute="bottom" id="iss-UZ-Uvs"/>
+                <constraint firstItem="9F8-nq-sUQ" firstAttribute="leading" secondItem="eXA-H5-e6a" secondAttribute="leading" constant="20" id="nx7-Ed-k5i"/>
                 <constraint firstItem="sH9-oX-I40" firstAttribute="trailing" secondItem="eXA-H5-e6a" secondAttribute="trailing" id="tvB-Ez-FCi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -80,6 +96,7 @@
         </view>
     </objects>
     <resources>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="generalBg">
             <color red="0.067000001668930054" green="0.11400000005960464" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
