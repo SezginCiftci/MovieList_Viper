@@ -27,7 +27,7 @@ final class VerticalCollectionCell: UICollectionViewCell, VerticalCollectionCell
     func prepareCollectionView() {
         horizontalCollectionView.delegate = self
         horizontalCollectionView.dataSource = self
-        horizontalCollectionView.register(nib: UINib(nibName: String(describing: HorizontalTrendingCell.self), bundle: nil), forCellWithClass: HorizontalTrendingCell.self)
+        horizontalCollectionView.register(cellType: HorizontalTrendingCell.self)
     }
     
     func reloadCollectionView() {
@@ -50,7 +50,7 @@ extension VerticalCollectionCell: UICollectionViewDelegateFlowLayout, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        let cell = collectionView.dequeCell(cellType: HorizontalTrendingCell.self, indexPath: indexPath)
         
         cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
         cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate

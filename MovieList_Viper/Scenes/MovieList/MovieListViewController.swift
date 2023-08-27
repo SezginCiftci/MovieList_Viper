@@ -55,8 +55,8 @@ extension MovieListViewController: MovieListViewProtocol {
     func prepareCollectionView() {
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
-        mainCollectionView.register(nib: UINib(nibName: String(describing: VerticalCollectionCell.self), bundle: nil), forCellWithClass: VerticalCollectionCell.self)
-        mainCollectionView.register(supplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self)
+        mainCollectionView.register(cellType: VerticalCollectionCell.self)
+        mainCollectionView.registerView(cellType: MovieCollectionReusableView.self)
     }
 }
 
@@ -96,21 +96,20 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withClass: VerticalCollectionCell.self, for: indexPath)
-        
+        let cell = collectionView.dequeCell(cellType: VerticalCollectionCell.self, indexPath: indexPath)
         let presenter = VerticalCollectionCellPresenter(view: cell,
                                                         movies: presenter?.cellForRow(at: indexPath) ?? [],
                                                         delegate: self)
         cell.presenter = presenter
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withClass: MovieCollectionReusableView.self, for: indexPath)
-        header.setupCell(at: indexPath)
-        header.delegate = self
-        
+        let header = collectionView.dequeView(cellType: MovieCollectionReusableView.self, indexPath: indexPath)
+        let presenter = MovieCollectionReusablePresenter(view: header,
+                                                         delegate: self,
+                                                         indexPath: indexPath)
+        header.presenter = presenter
         return header
     }
 }

@@ -40,7 +40,7 @@ final class MovieMoreViewController: UIViewController, MovieMoreViewProtocol {
     func prepareCollectionView() {
         seeMoreCollectionView.delegate = self
         seeMoreCollectionView.dataSource = self
-        seeMoreCollectionView.register(nib: UINib(nibName: String(describing: HorizontalTrendingCell.self), bundle: nil), forCellWithClass: HorizontalTrendingCell.self)
+        seeMoreCollectionView.register(cellType: HorizontalTrendingCell.self)
     }
     
     func prepareSearchBar() {
@@ -90,7 +90,7 @@ extension MovieMoreViewController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        let cell = collectionView.dequeCell(cellType: HorizontalTrendingCell.self, indexPath: indexPath)
         
         cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
         cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate

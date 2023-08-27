@@ -69,7 +69,7 @@ extension MovieDetailViewController: MovieDetailViewProtocol {
     func prepareCollectionView() {
         recommendationCollectionView.delegate = self
         recommendationCollectionView.dataSource = self
-        recommendationCollectionView.register(nib: UINib(nibName: String(describing: HorizontalTrendingCell.self), bundle: nil), forCellWithClass: HorizontalTrendingCell.self)
+        recommendationCollectionView.register(cellType: HorizontalTrendingCell.self)
     }
     
     func reloadCollectionView() {
@@ -98,7 +98,7 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withClass: HorizontalTrendingCell.self, for: indexPath)
+        let cell = collectionView.dequeCell(cellType: HorizontalTrendingCell.self, indexPath: indexPath)
         
         cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
         cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate
