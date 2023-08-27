@@ -70,6 +70,7 @@
 		C4C5770E2A9A48FC00BEC3E3 /* MovieMoreRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C5770D2A9A48FC00BEC3E3 /* MovieMoreRouter.swift */; };
 		C4C577102A9A55C300BEC3E3 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C5770F2A9A55C300BEC3E3 /* UIViewController+.swift */; };
 		C4C577122A9A9DBA00BEC3E3 /* Optional+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C577112A9A9DBA00BEC3E3 /* Optional+.swift */; };
+		C4C577142A9B879400BEC3E3 /* VerticalCollectionCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C577132A9B879400BEC3E3 /* VerticalCollectionCellPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		C4C5770D2A9A48FC00BEC3E3 /* MovieMoreRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMoreRouter.swift; sourceTree = "<group>"; };
 		C4C5770F2A9A55C300BEC3E3 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C4C577112A9A9DBA00BEC3E3 /* Optional+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+.swift"; sourceTree = "<group>"; };
+		C4C577132A9B879400BEC3E3 /* VerticalCollectionCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalCollectionCellPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 			children = (
 				C48643B92A9102AD003B8280 /* _components */,
 				C498846D2A900D6100D54372 /* VerticalCollectionCell.swift */,
+				C4C577132A9B879400BEC3E3 /* VerticalCollectionCellPresenter.swift */,
 				C49884702A900D9900D54372 /* VerticalCollectionCell.xib */,
 				C498846A2A90082F00D54372 /* MovieCollectionReusableView.swift */,
 			);
@@ -495,6 +498,7 @@
 				C48643B42A90F761003B8280 /* UICollectionView+.swift in Sources */,
 				C49884632A90072900D54372 /* HorizontalTrendingCell.swift in Sources */,
 				C498846B2A90082F00D54372 /* MovieCollectionReusableView.swift in Sources */,
+				C4C577142A9B879400BEC3E3 /* VerticalCollectionCellPresenter.swift in Sources */,
 				C4C5770A2A9A487600BEC3E3 /* MovieMorePresenter.swift in Sources */,
 				C498845D2A8FFF0D00D54372 /* MovieListViewController.swift in Sources */,
 				C4C577122A9A9DBA00BEC3E3 /* Optional+.swift in Sources */,

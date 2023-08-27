@@ -97,8 +97,12 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withClass: VerticalCollectionCell.self, for: indexPath)
-        cell.delegate = self
-        cell.movieResult = presenter?.cellForRow(at: indexPath)
+        
+        let presenter = VerticalCollectionCellPresenter(view: cell,
+                                                        movies: presenter?.cellForRow(at: indexPath) ?? [],
+                                                        delegate: self)
+        cell.presenter = presenter
+        
         return cell
     }
     
@@ -109,7 +113,6 @@ extension MovieListViewController: UICollectionViewDelegateFlowLayout, UICollect
         
         return header
     }
-    
 }
 
 //MARK: - Header Delegate Methods
