@@ -8,62 +8,45 @@
 import Foundation
 
 protocol MovieDetailInteractorProtocol {
-    func fetchMovieDetails(movieId: Int)
+    func loadDetail(movieId: Int)
+    func loadSimilarMovies(movieId: Int)
+    func loadRecommendations(movieId: Int)
 }
 
-final class MovieDetailInteractor {
+final class MovieDetailInteractor: MovieDetailInteractorProtocol {
     
     weak var presenter: MovieDetailInteractorOutputProcol?
     
-    private var movieDetail: MovieDetailModel?
-    private var similarMovies: MovieListModel?
-    
-    private func getAllMovies(movieId: Int) {
-        let group = DispatchGroup()
-
-        group.enter()
-        loadDetail(movieId: movieId) {
-            group.leave()
-        }
-        
-        group.enter()
-        loadSimilarMovies(movieId: movieId) {
-            group.leave()
-        }
-
-        group.notify(queue: .global(qos: .userInitiated)) { [weak self] in
-            self?.presenter?.didFetchMovieDetail(movie: self?.movieDetail)
-            self?.presenter?.didFetchSimilarMovies(movie: self?.similarMovies)
-        }
-    }
-    
-    private func loadDetail(movieId: Int, completion: @escaping () -> ()) {
+    func loadDetail(movieId: Int) {
         NetworkManager.shared.getMovieDetail(movieId: movieId) { result in
             switch result {
             case .success(let success):
-                self.movieDetail = success
+                self.presenter?.didFetchMovieDetailSuccess(movie: success)
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.presenter?.didFetchMovieDetailFailure(errorMessage: failure.localizedDescription)
             }
-            completion()
         }
     }
     
-    private func loadSimilarMovies(movieId: Int, completion: @escaping () -> ()) {
+    func loadSimilarMovies(movieId: Int) {
         NetworkManager.shared.getSimilarMovies(movieId: movieId) { result in
             switch result {
             case .success(let success):
-                self.similarMovies = success
+                self.presenter?.didFetchSimilarMoviesSuccess(movie: success)
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self.presenter?.didFetchSimilarMoviesFailure(errorMessage: failure.localizedDescription)
             }
-            completion()
         }
     }
-}
-
-extension MovieDetailInteractor: MovieDetailInteractorProtocol {
-    func fetchMovieDetails(movieId: Int) {
-        getAllMovies(movieId: movieId)
+    
+    func loadRecommendations(movieId: Int) {
+        NetworkManager.shared.getRecomendationsMovies(movieId: movieId) { result in
+            switch result {
+            case .success(let success):
+                self.presenter?.didFetchRecommendationsMoviesSuccess(movie: success)
+            case .failure(let failure):
+                self.presenter?.didFetchRecommendationsMoviesFailure(errorMessage: failure.localizedDescription)
+            }
+        }
     }
 }

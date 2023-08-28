@@ -41,7 +41,7 @@ final class MovieListPresenter: MovieListPresenterProtocol {
     var upcomingMovies: MovieListModel?
     var serviceResponseCounter: Int = 0 {
         didSet {
-            if serviceResponseCounter >= 3 {
+            if serviceResponseCounter >= MainCollectionCellTypes.allCases.count {
                 view?.reloadCollectionView()
                 view?.loadingEnded()
             }
@@ -120,4 +120,21 @@ extension MovieListPresenter: MovieListInteractorOutputProtocol {
         view?.showAlert("Popular Movies Error: \(errorMessage)", completion: {})
     }
     
+}
+
+enum MainCollectionCellTypes: Int, CaseIterable {
+    case trendingCell = 0
+    case popular
+    case upcoming
+    
+    var cellTypes: String {
+        switch self {
+        case .trendingCell:
+            return "Trending Movies"
+        case .popular:
+            return "Popular Movies"
+        case .upcoming:
+            return "Upcoming Movies"
+        }
+    }
 }

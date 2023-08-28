@@ -15,7 +15,7 @@ protocol MovieListInteractorProtocol {
     func loadUpcomingMovies()
 }
 
-final class MovieListInteractor {
+final class MovieListInteractor: MovieListInteractorProtocol {
     
     weak var presenter: MovieListInteractorOutputProtocol?
     
@@ -51,20 +51,4 @@ final class MovieListInteractor {
             }
         }
     }
-    
-//    private func loadRecommendations(completion: @escaping () -> ()) {
-//        NetworkManager.shared.getRecomendationsMovies(movieId: readSeenMovie()) { result in
-//            switch result {
-//            case .success(let success):
-//                self.recommendationsMovies = success
-//            case .failure(let failure):
-//                print(failure.localizedDescription)
-//            }
-//            completion()
-//        }
-//    }
-}
-
-extension MovieListInteractor: MovieListInteractorProtocol {
-    
 }

@@ -7,23 +7,6 @@
 
 import Foundation
 
-enum MainCollectionCellTypes: Int, CaseIterable {
-    case trendingCell = 0
-    case popular
-    case upcoming
-    
-    var cellTypes: String {
-        switch self {
-        case .trendingCell:
-            return "Trending Movies"
-        case .popular:
-            return "Popular Movies"
-        case .upcoming:
-            return "Upcoming Movies"
-        }
-    }
-}
-
 protocol MovieCollectionReusablePresenterInterface {
     var view: MovieCollectionReusableViewInterface? { get set }
     

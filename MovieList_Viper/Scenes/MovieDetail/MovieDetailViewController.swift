@@ -11,17 +11,13 @@ import Kingfisher
 protocol MovieDetailViewProtocol: AnyObject {
     func prepareNavigationBar()
     func prepareCollectionView()
-    func updateUI(backdropUrl: URL, movieTitle: String, dateText: String, overviewText: String)
     func reloadCollectionView()
+    func showAlert(_ errorMessage: String, completion: @escaping ()->())
 }
 
 final class MovieDetailViewController: UIViewController {
     
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var recommendationCollectionView: UICollectionView!
-    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     var presenter: MovieDetailPresenterProtocol?
      
@@ -35,9 +31,11 @@ final class MovieDetailViewController: UIViewController {
         presenter?.viewWillAppear()
     }
     
-    @IBAction func seeMoreButtonTapped(_ sender: UIButton) {
-        UIApplication.shared.open((presenter?.getHomepageUrl())!)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        presenter?.viewDidDisappear()
     }
+    
 }
 
 extension MovieDetailViewController: MovieDetailViewProtocol {
@@ -52,24 +50,11 @@ extension MovieDetailViewController: MovieDetailViewProtocol {
         navigationItem.scrollEdgeAppearance = appearance
     }
     
-    func updateUI(backdropUrl: URL, movieTitle: String, dateText: String, overviewText: String) {
-        DispatchQueue.main.async { [weak self] in
-            self?.backgroundImageView.kf.setImage(with: backdropUrl)
-            self?.title = movieTitle
-            self?.dateLabel.text = dateText
-            self?.overviewLabel.text = overviewText
-            
-            if (self?.overviewLabel.bounds.size.height)! > 100 {
-                self?.contentViewHeight.constant = (self?.view.frame.size.height)! + ((self?.overviewLabel.bounds.size.height)! - 100)
-                self?.view.layoutIfNeeded()
-            }
-        }
-    }
-    
     func prepareCollectionView() {
         recommendationCollectionView.delegate = self
         recommendationCollectionView.dataSource = self
         recommendationCollectionView.register(cellType: HorizontalTrendingCell.self)
+        recommendationCollectionView.registerView(cellType: DetailCollectionHeaderView.self)
     }
     
     func reloadCollectionView() {
@@ -89,6 +74,10 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
         return CGSize(width: (collectionView.frame.width - 20)/2, height: collectionView.frame.height - 20)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.numberOfRows(in: 0) ?? 0
     }
@@ -105,6 +94,12 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
         cell.movieImageView.kf.setImage(with: presenter?.cellForRow(at: indexPath)?.posterURL)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeView(cellType: DetailCollectionHeaderView.self, indexPath: indexPath)
+        
+        return header
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41A735D2A9CB61F00264F53 /* DetailCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41A735C2A9CB61F00264F53 /* DetailCollectionHeaderView.swift */; };
+		C41A735F2A9CB65200264F53 /* DetailCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C41A735E2A9CB65200264F53 /* DetailCollectionHeaderView.xib */; };
 		C45273252A90CD7800C56B32 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273242A90CD7800C56B32 /* Endpoint.swift */; };
 		C45273262A90CD7800C56B32 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273242A90CD7800C56B32 /* Endpoint.swift */; };
 		C45273282A90D87000C56B32 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45273272A90D87000C56B32 /* NetworkManager.swift */; };
@@ -93,6 +95,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C41A735C2A9CB61F00264F53 /* DetailCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionHeaderView.swift; sourceTree = "<group>"; };
+		C41A735E2A9CB65200264F53 /* DetailCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailCollectionHeaderView.xib; sourceTree = "<group>"; };
 		C45273242A90CD7800C56B32 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		C45273272A90D87000C56B32 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C463E32A2A95216300561EC6 /* MovieListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListTests.swift; sourceTree = "<group>"; };
@@ -169,6 +173,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C41A735B2A9CB60700264F53 /* _components */ = {
+			isa = PBXGroup;
+			children = (
+				C41A735C2A9CB61F00264F53 /* DetailCollectionHeaderView.swift */,
+				C41A735E2A9CB65200264F53 /* DetailCollectionHeaderView.xib */,
+			);
+			path = _components;
+			sourceTree = "<group>";
+		};
 		C45273232A90CC0000C56B32 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +206,7 @@
 		C48644022A916F45003B8280 /* MovieDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C41A735B2A9CB60700264F53 /* _components */,
 				C48644072A916F97003B8280 /* MovieDetailViewController.swift */,
 				C486440A2A916FCD003B8280 /* MovieDetailViewController.xib */,
 				C486440D2A917013003B8280 /* MovieDetailPresenter.swift */,
@@ -469,6 +483,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41A735F2A9CB65200264F53 /* DetailCollectionHeaderView.xib in Resources */,
 				C4C5771A2A9BB30E00BEC3E3 /* MovieCollectionReusableView.xib in Resources */,
 				C4C577082A9A3D9A00BEC3E3 /* MovieMoreViewController.xib in Resources */,
 				C486440B2A916FCD003B8280 /* MovieDetailViewController.xib in Resources */,
@@ -526,6 +541,7 @@
 				C49884292A8FFE3900D54372 /* AppDelegate.swift in Sources */,
 				C48644082A916F97003B8280 /* MovieDetailViewController.swift in Sources */,
 				C4C577102A9A55C300BEC3E3 /* UIViewController+.swift in Sources */,
+				C41A735D2A9CB61F00264F53 /* DetailCollectionHeaderView.swift in Sources */,
 				C48644142A917124003B8280 /* MovieDetailRouter.swift in Sources */,
 				C48644112A9170AD003B8280 /* MovieDetailInteractor.swift in Sources */,
 				C4C5771C2A9BB6F300BEC3E3 /* UICollectionReusableView.swift in Sources */,
