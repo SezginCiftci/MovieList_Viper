@@ -91,14 +91,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ur-46-5of" userLabel="BottomContent">
                     <rect key="frame" x="0.0" y="239.33333333333334" width="393" height="119.66666666666666"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="u90-c1-f5A">
-                            <rect key="frame" x="176.66666666666663" y="19.999999999999972" width="196.33333333333337" height="30"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="u90-c1-f5A">
+                            <rect key="frame" x="176.66666666666663" y="19.999999999999972" width="196.33333333333337" height="60"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCG-Z7-0ow">
-                                    <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="30"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCG-Z7-0ow" userLabel="Home Button View">
+                                    <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="27"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bhz-ck-8O8">
-                                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="30"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="27"/>
                                             <color key="backgroundColor" systemColor="linkColor"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Visit Home Page">
@@ -121,13 +121,45 @@
                                         <constraint firstItem="Bhz-ck-8O8" firstAttribute="top" secondItem="xCG-Z7-0ow" secondAttribute="top" id="SMJ-zA-TYf"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1HS-yc-nhj" userLabel="Star View">
+                                    <rect key="frame" x="0.0" y="33" width="196.33333333333334" height="27"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FLh-PN-DDC">
+                                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="27"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="z7y-a3-4Yo">
+                                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="32.666666666666664" height="26.666666666666664"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="j1F-TQ-drw">
+                                                    <rect key="frame" x="40.666666666666686" y="-0.33333333333333215" width="33" height="26.666666666666664"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cFR-yl-Kxq">
+                                                    <rect key="frame" x="81.666666666666657" y="-0.33333333333333215" width="33" height="26.666666666666664"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star.leadinghalf.filled" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="lQT-Xs-3fb">
+                                                    <rect key="frame" x="122.66666666666667" y="-0.33333333333333215" width="32.666666666666671" height="26.666666666666664"/>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fpW-TE-ofx">
+                                                    <rect key="frame" x="163.33333333333334" y="-0.33333333333333215" width="33" height="26.666666666666664"/>
+                                                </imageView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="FLh-PN-DDC" firstAttribute="top" secondItem="1HS-yc-nhj" secondAttribute="top" id="HHe-1q-ZCf"/>
+                                        <constraint firstItem="FLh-PN-DDC" firstAttribute="leading" secondItem="1HS-yc-nhj" secondAttribute="leading" id="YPU-Bf-ugU"/>
+                                        <constraint firstAttribute="bottom" secondItem="FLh-PN-DDC" secondAttribute="bottom" id="a8w-IC-erJ"/>
+                                        <constraint firstAttribute="trailing" secondItem="FLh-PN-DDC" secondAttribute="trailing" id="zDS-GC-w4J"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                         </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="u90-c1-f5A" firstAttribute="width" secondItem="7Ur-46-5of" secondAttribute="width" multiplier="1:2" id="5ZS-ql-YZA"/>
-                        <constraint firstItem="u90-c1-f5A" firstAttribute="height" secondItem="7Ur-46-5of" secondAttribute="height" multiplier="1:4" id="jfJ-Sx-g28"/>
+                        <constraint firstItem="u90-c1-f5A" firstAttribute="height" secondItem="7Ur-46-5of" secondAttribute="height" multiplier="1:2" id="jfJ-Sx-g28"/>
                         <constraint firstAttribute="trailing" secondItem="u90-c1-f5A" secondAttribute="trailing" constant="20" id="okK-xl-Q0f"/>
                         <constraint firstItem="u90-c1-f5A" firstAttribute="top" secondItem="7Ur-46-5of" secondAttribute="top" constant="20" id="p9P-Mo-ra9"/>
                     </constraints>
@@ -155,6 +187,9 @@
     </objects>
     <resources>
         <image name="globe" catalog="system" width="128" height="123"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <image name="star.leadinghalf.filled" catalog="system" width="128" height="116"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

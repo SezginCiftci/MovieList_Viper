@@ -11,7 +11,7 @@ protocol MovieDetailPresenterProtocol {
     func viewDidLoad()
     func viewWillAppear()
     func viewDidDisappear()
-    func cellForRow(at index: IndexPath) -> Movie?
+    func cellForRow(at index: IndexPath) -> [Movie]?
     func numberOfRows(in section: Int) -> Int
     func numberOfSection() -> Int
     func getHomepageUrl() -> URL
@@ -63,16 +63,20 @@ final class MovieDetailPresenter: MovieDetailPresenterProtocol {
         serviceResponseCounter = 0
     }
     
-    func cellForRow(at index: IndexPath) -> Movie? {
-        return similarMovies?.results[index.row]
+    func cellForRow(at index: IndexPath) -> [Movie]? {
+        switch index.section {
+        case 0: return similarMovies?.results
+        case 1: return recommendationMovies?.results
+        default: return nil
+        }
     }
     
     func numberOfRows(in section: Int) -> Int {
-        return similarMovies?.results.count ?? 0
+        return 1
     }
     
     func numberOfSection() -> Int {
-        return 1
+        return DetailCollectionCellTypes.allCases.count
     }
     
     func getHomepageUrl() -> URL {
@@ -84,10 +88,6 @@ extension MovieDetailPresenter: MovieDetailInteractorOutputProcol {
     func didFetchMovieDetailSuccess(movie: MovieDetailModel?) {
         movieDetail = movie
         serviceResponseCounter += 1
-        view?.updateUI(backdropUrl: (movieDetail?.backdropURL ?? URL(string: "https://en.wikipedia.org/wiki/HTTP_404"))!,
-                       movieTitle: movie?.originalTitle ?? "",
-                       dateText: movieDetail?.releaseDate ?? "",
-                       overviewText: movieDetail?.overview ?? "")
     }
     
     func didFetchSimilarMoviesSuccess(movie: MovieListModel?) {

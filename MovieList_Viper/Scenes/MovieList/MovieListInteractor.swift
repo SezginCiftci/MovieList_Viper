@@ -25,7 +25,7 @@ final class MovieListInteractor: MovieListInteractorProtocol {
             case .success(let success):
                 self?.presenter?.didFetchTrendingMoviesSuccess(movie: success)
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self?.presenter?.didFetchTrendingMoviesFailure(errorMessage: failure.localizedDescription)
             }
         }
     }
@@ -36,7 +36,7 @@ final class MovieListInteractor: MovieListInteractorProtocol {
             case .success(let success):
                 self?.presenter?.didFetchPopularMoviesSuccess(movie: success)
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self?.presenter?.didFetchPopularMoviesFailure(errorMessage: failure.localizedDescription)
             }
         }
     }
@@ -47,7 +47,7 @@ final class MovieListInteractor: MovieListInteractorProtocol {
             case .success(let success):
                 self?.presenter?.didFetchUpcomingMoviesSuccess(movie: success)
             case .failure(let failure):
-                print(failure.localizedDescription)
+                self?.presenter?.didFetchUpcomingMoviesFailure(errorMessage: failure.localizedDescription)
             }
         }
     }

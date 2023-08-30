@@ -53,7 +53,7 @@ extension MovieDetailViewController: MovieDetailViewProtocol {
     func prepareCollectionView() {
         recommendationCollectionView.delegate = self
         recommendationCollectionView.dataSource = self
-        recommendationCollectionView.register(cellType: HorizontalTrendingCell.self)
+        recommendationCollectionView.register(cellType: VerticalCollectionCell.self)
         recommendationCollectionView.registerView(cellType: DetailCollectionHeaderView.self)
     }
     
@@ -79,7 +79,7 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter?.numberOfRows(in: 0) ?? 0
+        return presenter?.numberOfRows(in: section) ?? 0
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -87,11 +87,15 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeCell(cellType: HorizontalTrendingCell.self, indexPath: indexPath)
+        let cell = collectionView.dequeCell(cellType: VerticalCollectionCell.self, indexPath: indexPath)
         
-        cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
-        cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate
-        cell.movieImageView.kf.setImage(with: presenter?.cellForRow(at: indexPath)?.posterURL)
+//        cell.movieTitleLabel.text = presenter?.cellForRow(at: indexPath)?.title
+//        cell.movieReleaseDateLabel.text = presenter?.cellForRow(at: indexPath)?.releaseDate
+//        cell.movieImageView.kf.setImage(with: presenter?.cellForRow(at: indexPath)?.posterURL)
+        
+        let presenter = VerticalCollectionCellPresenter(view: cell,
+                                                        movies: presenter?.cellForRow(at: indexPath) ?? [],
+                                                        delegate: self)
         
         return cell
     }
@@ -102,9 +106,15 @@ extension MovieDetailViewController: UICollectionViewDelegateFlowLayout, UIColle
         return header
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let movieId = presenter?.cellForRow(at: indexPath)?.id ?? 742536
-        let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
-        present(movieDetail, animated: true)
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let movieId = presenter?.cellForRow(at: indexPath)?.id ?? 742536
+//        let movieDetail = MovieDetailRouter.createModule(movieId: movieId)
+//        present(movieDetail, animated: true)
+//    }
+}
+
+extension MovieDetailViewController: VerticalCollectionCellDelegate {
+    func didSelectMovie(with movieId: Int) {
+        //TODO: - route to detail
     }
 }

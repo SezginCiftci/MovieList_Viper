@@ -14,9 +14,57 @@
             filePath = "MovieList_Viper/Scenes/MovieDetail/MovieDetailPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "didFetchMovieDetailSuccess(movie:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1ED7C4D5-BF69-49A4-9364-9F655AFFEAD4 - f0a60a5dbeb95102"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MovieList_Viper.MovieDetailPresenter.didFetchMovieDetailSuccess(movie: Swift.Optional&lt;MovieList_Viper.MovieDetailModel&gt;) -&gt; ()"
+                  moduleName = "MovieList_Viper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sezginciftci/Desktop/MovieList_Viper/MovieList_Viper/Scenes/MovieDetail/MovieDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "1ED7C4D5-BF69-49A4-9364-9F655AFFEAD4 - 2c45041b6c11334c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;MovieList_Viper.MovieDetailModel, Swift.Error&gt;) -&gt; () in MovieList_Viper.MovieDetailInteractor.loadDetail(movieId: Swift.Int) -&gt; ()"
+                  moduleName = "MovieList_Viper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sezginciftci/Desktop/MovieList_Viper/MovieList_Viper/Scenes/MovieDetail/MovieDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "89"
+                  endingLineNumber = "89"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "48349E7D-1EB5-4156-A236-BC447BF22B06"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MovieList_Viper/Scenes/MovieList/MovieListViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
